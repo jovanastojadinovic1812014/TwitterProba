@@ -92,18 +92,29 @@ public class TwitterTest {
 
 	@Test
 	public void testVratiPorukeSveOk() {
-		
-		t.unesi("Jovana", "#cu");
-		
-		TwitterPoruka[] nizTviterPoruka = new TwitterPoruka[10];
-		
-		nizTviterPoruka[0] = new TwitterPoruka();
+
+		TwitterPoruka[] nizTviterPoruka = new TwitterPoruka[3];
+
+		for (int i = 0; i < nizTviterPoruka.length; i++) {
+			nizTviterPoruka[i] = new TwitterPoruka();
+		}
 		
 		nizTviterPoruka[0].setKorisnik("Jovana");
-		nizTviterPoruka[0].setPoruka("#cu");
-	
-		assertArrayEquals(nizTviterPoruka, t.vratiPoruke(10, "#cu"));
-	
+		nizTviterPoruka[0].setPoruka("#bg");
+		
+		nizTviterPoruka[1].setKorisnik("Tamara");
+		nizTviterPoruka[1].setPoruka("#kg");
+		
+		nizTviterPoruka[2].setKorisnik("Uros");
+		nizTviterPoruka[2].setPoruka("#bg");
+		
+		t.unesi("Jovana", "#bg");
+		t.unesi("Uros", "#bg");
+
+		TwitterPoruka[] nizTviterPoruka2 = t.vratiPoruke(3, "#bg");
+
+		assertArrayEquals(nizTviterPoruka, nizTviterPoruka2);
+
 	}
 
 	@Test(expected = java.lang.RuntimeException.class)
@@ -126,7 +137,7 @@ public class TwitterTest {
 	public void testVratiPorukeKapacitetManjiJednakNuli() {
 		int maxBroj = 0;
 		String tag = "fon";
-		
+
 		t.vratiPoruke(maxBroj, tag);
 	}
 }
